@@ -1,16 +1,11 @@
 import React from "react";
 import { bool } from "prop-types";
 import { StyledMenu } from "./Menu.styled";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import Contact from "../Contact/Contact";
-import Sitter from "../Sitter/Sitter";
-import RegisterSitter from "../RegisterSitter";
-import RegisterParent from "../RegisterParent";
+import { Link } from "react-router-dom";
 
-const Menu = ({ open, ...props }) => {
+const Menu = ({ open, setOpen, ...props }) => {
   return (
-    <BrowserRouter>
-      <StyledMenu open={open}>
+      <StyledMenu open={open} onClick={() => setOpen(false)}>
         <Link to="/">
           <span aria-hidden="true">🏠</span>
           Home
@@ -32,21 +27,6 @@ const Menu = ({ open, ...props }) => {
           Register As A Parent
         </Link>
       </StyledMenu>
-      <Switch>
-        <Route path="/sitter">
-          <Sitter />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/RegisterSitter">
-          <RegisterSitter />
-        </Route>
-        <Route path="/RegisterParent">
-          <RegisterParent />
-        </Route>
-      </Switch>
-    </BrowserRouter>
   );
 };
 
