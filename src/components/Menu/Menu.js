@@ -24,12 +24,12 @@ const Menu = ({ open, ...props }) => {
           Contact
         </Link>
         <Link to="/registersitter">
-            <span aria-hidden="true">👩‍🍼</span>
-            Register As A Caregiver
+          <span aria-hidden="true">👩‍🍼</span>
+          Register As A Caregiver
         </Link>
         <Link to="/registerparent">
-            <span aria-hidden="true">👩</span>
-            Register As A Parent
+          <span aria-hidden="true">👩</span>
+          Register As A Parent
         </Link>
       </StyledMenu>
       <Switch>
@@ -40,10 +40,10 @@ const Menu = ({ open, ...props }) => {
           <Contact />
         </Route>
         <Route path="/RegisterSitter">
-            <RegisterSitter />
+          <RegisterSitter />
         </Route>
         <Route path="/RegisterParent">
-            <RegisterParent />
+          <RegisterParent />
         </Route>
       </Switch>
     </BrowserRouter>

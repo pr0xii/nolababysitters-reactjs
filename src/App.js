@@ -17,7 +17,7 @@ function App() {
               "Welcome to NOLA Babysitters.",
               "Do you need to find the perfect sitter?",
               "We'd love to help..",
-              "And we hope you enjoy your stay!"
+              "And we hope you enjoy your stay!",
             ]}
             typeSpeed={40}
             backSpeed={30}
