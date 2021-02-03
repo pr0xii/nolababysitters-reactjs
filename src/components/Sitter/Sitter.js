@@ -13,24 +13,13 @@ class Sitter extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3>Navigation</h3>
-        { this.renderThumbs() }
-        <button onClick={() => this.Carousel._slidePrev()}>Prev button</button>
-        <button onClick={() => this.Carousel._slideNext()}>Next button</button>
-        <h3>React Alice Carousel</h3>
-        <AliceCarousel
-          dotsDisabled={true}
-          buttonsDisabled={true}
-          ref={ el => this.Carousel = el }
-        >
-          <div className="yours-custom-class"><h2>Test One</h2></div>
-          <div className="yours-custom-class"><h2>Test Two</h2></div>
-          <div className="yours-custom-class"><h2>Test Three</h2></div>
-          <div className="yours-custom-class"><h2>Test Four</h2></div>
-          <div className="yours-custom-class"><h2>Test Five</h2></div>
-        </AliceCarousel>
-      </div>
+      <AliceCarousel>
+    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
+    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
+    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
+    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
+    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
+  </AliceCarousel>
     );
   }
 }
