@@ -1,10 +1,10 @@
-.App {
-  text-align: center;
-
+#typed { /* Text Styling */
+  font-family: "Script12 BT";
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
-#typed { /* Text Styling */
-  font-family: "Consolas";
-  font-weight: bold;
-  font-size: 1.75em;
+.bottom-nav{
+  width: 100%;
+  position: static;
 }

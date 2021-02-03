@@ -14,10 +14,6 @@ const Menu = ({ open, setOpen, ...props }) => {
           <span aria-hidden="true">💸</span>
           Find A Sitter
         </Link>
-        <Link to="/contact">
-          <span aria-hidden="true">📩</span>
-          Contact
-        </Link>
         <Link to="/registersitter">
           <span aria-hidden="true">👩‍🍼</span>
           Register As A Caregiver
@@ -25,6 +21,10 @@ const Menu = ({ open, setOpen, ...props }) => {
         <Link to="/registerparent">
           <span aria-hidden="true">👩</span>
           Register As A Parent
+        </Link>
+        <Link to="/contact">
+          <span aria-hidden="true">📩</span>
+          Contact
         </Link>
       </StyledMenu>
   );

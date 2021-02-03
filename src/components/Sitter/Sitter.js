@@ -1,10 +1,9 @@
 import React from 'react';
 
-
 export default function Sitter(){
     return(
         <div>
-          <p>Sitter</p>
+          <p>Here you will pick a sitter.</p>
         </div>
     );
 }

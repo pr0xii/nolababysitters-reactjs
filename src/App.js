@@ -10,6 +10,10 @@ import { Route, Switch } from 'react-router-dom';
 import Contact from "./components/Contact/Contact";
 import Sitter from "./components/Sitter/Sitter";
 import HomePage from "./components/HomePage/HomePage";
+import BottomNav from "./components/BottomNav/BottomNav";
+import './App.css';
+
+
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -27,10 +31,19 @@ function App() {
           <Route path="/RegisterParent" component={RegisterParent} />
           <Route path='/' component={HomePage} />
         </Switch>
+
         <div ref={node}>
           <Burger open={open} setOpen={setOpen} />
           <Menu open={open} setOpen={setOpen} />
         </div>
+
+
+        {/* How do I move this down? */}
+        <div className="bottom-nav">
+          <BottomNav />
+        </div>
+
+
       </>
     </ThemeProvider>
   );
