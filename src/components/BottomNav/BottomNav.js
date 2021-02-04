@@ -29,7 +29,7 @@ export default function LabelBottomNavigation() {
   };
 
   return (
-    <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
+    <BottomNavigation value={value} onChange={handleChange} className={classes.root} >
       <BottomNavigationAction label="Recent Sitters" value="recents" icon={<RestoreIcon />} />
       <BottomNavigationAction label="Favorite Sitters" value="favorites" icon={<FavoriteIcon />} />
       <BottomNavigationAction label="Nearby Sitters" value="nearby" icon={<LocationOnIcon />} />

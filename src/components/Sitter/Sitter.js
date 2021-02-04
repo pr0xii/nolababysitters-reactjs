@@ -1,25 +1,26 @@
 import React from 'react';
-import AliceCarousel from 'react-alice-carousel';
-import "react-alice-carousel/lib/alice-carousel.css";
+import './styles.css'
 
 class Sitter extends React.Component {
-  renderThumbs = () =>
-    <ul>
-      {
-        [1,2,3,4,5].map((item, i) =>
-          <li key={i} onClick={() => this.Carousel._onDotClick(i)}>Thumb {item}</li>)
-      }
-    </ul>;
-
+  state = {
+    activeItemIndex: 0
+  }
   render() {
+    const items = [
+      <div>1</div>,
+      <div>2</div>,
+      <div>3</div>,
+      <div>4</div>
+    ]
     return (
-      <AliceCarousel>
-    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
-    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
-    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
-    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
-    <img src="https://via.placeholder.com/300/09f/fff.png" className="yours-custom-class" />
-  </AliceCarousel>
+      <section>
+        <ul className='__custome-slider'>
+          {items.map((item, index) => <li key={index} className={`${this.state.activeItemIndex === index ? 'active' : ''}`}>{item}</li>)}
+        </ul>
+        <ul className='__custom-slider-dots'>
+          {items.map((item, index) => <li key={index} className={`${this.state.activeItemIndex === index ? 'active' : ''}`} onClick={() => this.setState({ activeItemIndex: index })}></li>)}
+        </ul>
+      </section>
     );
   }
 }

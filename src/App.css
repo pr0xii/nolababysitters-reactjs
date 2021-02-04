@@ -1,3 +1,7 @@
+body{
+  /* height: 300vh !important; */
+}
+
 #typed { /* Text Styling */
   font-family: "Script12 BT";
   font-weight: bold;
@@ -6,5 +10,7 @@
 
 .bottom-nav{
   width: 100%;
-  position: static;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
