@@ -1,0 +1,24 @@
+.__Register-Parent{
+    display: grid;
+    grid-gap: 1rem;
+    input, button, textarea{
+        padding: 0.8rem 1rem;
+        font-family: inherit;
+        outline: none;
+    }
+    textarea{
+        width: 100%;
+        margin-top: 1rem;
+        display: none;
+    }
+    button{
+        min-width: 300px;
+        cursor: pointer;
+        &:active{
+            background: lightgrey;
+        }
+    }
+    .babySitterInput:checked ~ textarea{
+        display: block;
+    }
+}
