@@ -12,7 +12,9 @@ export default function Contact(){
             <input type="text" class="field" placeholder="Your Email" />
             <input type="text" class="field" placeholder="Phone" />
             <textarea placeholder="Message" class="field"></textarea>
+            <div>
             <button class="btn">Send</button>
+            </div>
             </div>
         </div>
     </div>
