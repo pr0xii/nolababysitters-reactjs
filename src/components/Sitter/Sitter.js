@@ -2,43 +2,30 @@ import React from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
 import Carousel from 'react-material-ui-carousel'
-import './styles.css'
+import { getSitters } from '../../firebase/utility';
+import './styles.scss'
+import { Link } from 'react-router-dom';
+import { Spinner } from 'reactstrap';
 
 class Sitter extends React.Component {
   state = {
-    activeItemIndex: 0
+    sitters: null
   }
-  // renderThumbs = () =>
-  //   <ul>
-  //     {
-  //       [1, 2, 3, 4, 5].map((item, i) =>
-  //         <li key={i} onClick={() => this.Carousel._onDotClick(i)}>Thumb {item}</li>)
-  //     }
-  //   </ul>;
-  // items = [
-  //   <div className='crusual___item' style={{background: 'url(https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg)'}}>
-  //     askaljs al;sk ;lksl k
-  //   </div>,
-  //   <img src="https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569__340.jpg" />,
-  //   <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" />,
-  //   <img src="https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569__340.jpg" />,
-  //   <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" />,
-  // ]
+  componentDidMount() {
+    getSitters().then(sitters => this.setState({ sitters }));
+  }
   render() {
-    const items = [
-      <div>1</div>,
-      <div>2</div>,
-      <div>3</div>,
-      <div>4</div>
-    ]
+    const { sitters } = this.state;
     return (
-      <section>
-        <ul className='__custome-slider'>
-          {items.map((item, index) => <li key={index} className={`${this.state.activeItemIndex === index ? 'active' : ''}`}>{item}</li>)}
-        </ul>
-        <ul className='__custom-slider-dots'>
-          {items.map((item, index) => <li key={index} className={`${this.state.activeItemIndex === index ? 'active' : ''}`} onClick={() => this.setState({ activeItemIndex: index })}></li>)}
-        </ul>
+      <section className='__sitters-section'>
+        {sitters ? sitters.map((sitter) => (
+          <div key={sitter.id} className='__sitter'>
+            <img src={sitter.photoURL} alt={sitter.name} />
+            <h4>{sitter.displayName}</h4>
+            <p>{sitter.bio}</p>
+            <Link to={`/sitter/${sitter.id}`}>More Info</Link>
+          </div>
+        )): <Spinner />}
       </section>
     );
   }

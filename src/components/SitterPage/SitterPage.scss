@@ -1,0 +1,13 @@
+.__sitter-page{
+    button{
+        cursor: pointer;
+    }
+    
+    input, button, textarea, select{
+        padding: 0.8rem 1rem;
+        font-family: inherit;
+        outline: none;
+        width: 100%;
+        margin: 1rem 0;
+    }
+}

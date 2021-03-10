@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.scss';
 import { signUpWithEmailAndPassWord } from "../../firebase/utility";
-import InputPhoto from '../../pages/UI/InputPhoto';
+import InputPhoto from '../../UI/InputPhoto';
 
 export default function RegisterParent() {
     const signUpHandler = e => {
