@@ -78,3 +78,8 @@ export const getSitter = id => {
 export const hireBaySitter = hireDetails => {
     return db.collection('hired').add(hireDetails)
 }
+
+export const getHireDetails = id => {
+    return db.collection('hired').where('sitterId', '==', id).get()
+        
+}

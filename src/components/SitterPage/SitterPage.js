@@ -4,6 +4,7 @@ import { getSitter, hireBaySitter } from '../../firebase/utility';
 import './SitterPage.scss';
 import { connect } from 'react-redux';
 import Spinner from '../../UI/Spinner';
+import { Link } from 'react-router-dom'
 
 const chooseTime = [
     { time: '08:00am', value: 8 },
@@ -19,7 +20,9 @@ const chooseTime = [
 
 class SitterPage extends Component {
     getTime = time => {
-        return chooseTime.find(t => t.value === time).time;
+        const findTime = chooseTime.find(t => t.value === time);
+        if(findTime) return findTime.time;
+        return this.props.history.push('/');
     }
     state = {
         sitter: 'initial',
@@ -38,10 +41,13 @@ class SitterPage extends Component {
         const year = date.getFullYear();
         const formatedDate = `${year}-${month}-${day}`
 
+        const { startTime, endTime, selectedDate } = this.props.match.params;
+        
+
         getSitter(id).then(sitter => {
             if (!sitter) return this.setState({ sitter: undefined });
             sitter.id = id;
-            this.setState({ sitter, selectedDate: formatedDate, startTime: date.getHours() + 1, endTime: date.getHours() + 2 });
+            this.setState({ sitter, selectedDate: selectedDate || formatedDate, startTime: startTime || date.getHours() + 1, endTime: endTime || date.getHours() + 2 });
         })
     }
 
@@ -79,12 +85,18 @@ class SitterPage extends Component {
             selectedDate,
             userId: this.props.user.uid
         }
+        const isABackup = this.props.match.params.startTime;
+        if(isABackup){
+            hireDetails.asABackup = true;
+        }
         hireBaySitter(hireDetails)
-            .then(res => this.setState({ isLoader: false }))
+            .then(res => this.setState({ isLoader: false, showSuccessMessage: true }))
             .catch(err => console.log(err))
     }
     render() {
-        const { sitter } = this.state;
+        const { sitter, isLoading } = this.state;
+        const isSitterHiredByCurrentUser = sitter !== 'initial' && sitter !== undefined && sitter.hired.find(sitterHire => sitterHire.userId === this.props.user.uid)
+        const isABackup = this.props.match.params.startTime;
         switch (sitter) {
             case "initial":
                 return <Spinner />
@@ -103,38 +115,44 @@ class SitterPage extends Component {
                                 </div>
                             ))}
                         </div>
-                        <img alt='' src={sitter.photoURL} />
+                        <img alt='' src={sitter.photoURL} className='baby-siiter-image' />
                         <h2 style={{ textAlign: 'center' }}>{sitter.displayName}</h2>
                         <p>
                             {sitter.bio}
                         </p>
-                        <div className='input-field'>
-                            <span>Choose Date</span>
-                            <input type='date' value={this.state.selectedDate} onChange={this.onDateChange} />
-                        </div>
-                        <div>
+
+                        {!isABackup && (
                             <div>
-                                <span>Start TIme</span>
-                                <select value={this.state.startTime} onChange={this.onStartTimeChange} name='startTime'>
-                                    {chooseTime.slice(0, chooseTime.length - 1).map(time => (
-                                        <option key={time.value} value={time.value}>
-                                            {time.time}
-                                        </option>
-                                    ))}
-                                </select>
+                                <label>
+                                    <input type='date' placeholder='Choose Date' value={this.state.selectedDate} onChange={this.onDateChange} />
+                                </label>
+                                <div>
+                                    <span>Start TIme</span>
+                                    <select value={this.state.startTime} onChange={this.onStartTimeChange} name='startTime'>
+                                        {chooseTime.slice(0, chooseTime.length - 1).map(time => (
+                                            <option key={time.value} value={time.value}>
+                                                {time.time}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div>
+                                    <span>End TIme</span>
+                                    <select value={this.state.endTime} name='endTime' onChange={this.onEndTimeChange}>
+                                        {chooseTime.map(time => time.value > this.state.startTime && (
+                                            <option key={time.value} value={time.value}>
+                                                {time.time}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
-                            <div>
-                                <span>End TIme</span>
-                                <select value={this.state.endTime} name='endTime' onChange={this.onEndTimeChange}>
-                                    {chooseTime.map(time => time.value > this.state.startTime && (
-                                        <option key={time.value} value={time.value}>
-                                            {time.time}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-                        {this.state.isLoading ? <Spinner /> : <button onClick={this.onSubmit}>Hired</button>}
+                        )}
+                        {this.state.showSuccessMessage && <div>Successfull</div>}
+                        {!isSitterHiredByCurrentUser && (
+                            isLoading ? <Spinner /> : <button onClick={this.onSubmit}>{isABackup ? 'Hire as a Backup' : 'Hire'}</button>
+                        )}
+                        {isSitterHiredByCurrentUser && !isABackup && <Link to={`/sitters/${this.state.startTime}/${this.state.endTime}/${this.state.selectedDate}`}>Hire a backup</Link>}
                     </div>
                 )
         }

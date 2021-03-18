@@ -55,9 +55,10 @@ function App() {
               <Menu open={open} setOpen={setOpen} />
             </div>
             <Switch>
-              <Route exact path="/sitter" component={Sitter} />
+              <Route path="/sitters" component={Sitter} />
               <Route path="/contact" component={Contact} />
-              <Route path='/sitter/:id' component={SitterPage} />
+              <Route exact path='/sitter/:id' component={SitterPage} />
+              <Route path='/sitter/:id/:startTime/:endTime/:selectedDate' component={SitterPage} />
               <Route path='/testing' component={TestingStore} />
               {/* <Route path="/RegisterSitter" component={RegisterSitter} /> */}
               {!user && <Route path="/RegisterParent" component={RegisterParent} />}

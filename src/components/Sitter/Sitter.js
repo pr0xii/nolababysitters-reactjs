@@ -16,6 +16,7 @@ class Sitter extends React.Component {
   }
   render() {
     const { sitters } = this.state;
+    const path = this.props.location.pathname.replace(this.props.match.path, '')
     return (
       <section className='__sitters-section'>
         {sitters ? sitters.map((sitter) => (
@@ -23,7 +24,7 @@ class Sitter extends React.Component {
             <img src={sitter.photoURL} alt={sitter.name} />
             <h4>{sitter.displayName}</h4>
             <p>{sitter.bio}</p>
-            <Link to={`/sitter/${sitter.id}`}>More Info</Link>
+            <Link to={`/sitter/${sitter.id}${path}`}>More Info</Link>
           </div>
         )): <Spinner />}
       </section>
