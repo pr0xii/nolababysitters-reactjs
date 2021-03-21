@@ -43,12 +43,18 @@ class HireSitterForm extends Component {
         const { sitter, startTime, endTime, selectedDate } = this.state;
         if (endTime === "" || startTime === "" || endTime === "") return this.setState({ error: "Please fill all the fields", showSuccessMessage: false });
         this.setState({ isLoading: true, error: "", showSuccessMessage: false });
+        const {user} = this.props;
         const hireDetails = {
             sitterId: sitter.id,
-            startTime,
-            endTime,
+            startTime: +startTime,
+            endTime: +endTime,
             selectedDate,
-            userId: this.props.user.uid
+            customerId: this.props.user.uid,
+            sitterName: sitter.displayName,
+            sitterPhotoURL: sitter.photoURL,
+            customerName: user.displayName,
+            customerEmail: user.email,
+            customerPhotoURL: user.photoURL,
         }
         hireBaySitter(hireDetails)
             .then(({ id }) => {
@@ -82,7 +88,7 @@ class HireSitterForm extends Component {
                     <>
                         <div>
                             <span className="label">Start Time</span>
-                            <select className="field" value={startTime} onChange={e => this.setState({ startTime: +e.target.value, endTime: e.target.value + 1 })} name='startTime'>
+                            <select className="field" value={startTime} onChange={e => this.setState({ startTime: +e.target.value, endTime: +e.target.value + 1 })} name='startTime'>
                                 <option value="" disabled>Select Start Time</option>
                                 {availableHours.slice(0, availableHours.length - 1).map(time => (
                                     <option key={time.value} value={time.value}>

@@ -89,6 +89,23 @@ export const getHireDetails = id => {
 
 }
 
-export const getBabySitterShedulesForASpecifiDate = (sitterId, babySitter) => {
-
+export const getAllHiredSitterbyUser = (customerId) => {
+    return db.collection('hired').where('customerId', '==', customerId).get()
+        .then(snapshot => {
+            return snapshot.docs.map(doc => {
+                const hireDetails = doc.data();
+                hireDetails.id = doc.id;
+                return hireDetails;
+            })
+        })
+}
+export const getAllCustomers = (sitterId) => {
+    return db.collection('hired').where('sitterId', '==', sitterId).get()
+        .then(snapshot => {
+            return snapshot.docs.map(doc => {
+                const hireDetails = doc.data();
+                hireDetails.id = doc.id;
+                return hireDetails;
+            })
+        })
 }
