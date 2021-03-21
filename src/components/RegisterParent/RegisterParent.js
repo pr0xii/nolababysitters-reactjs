@@ -4,6 +4,7 @@ import { signUpWithEmailAndPassWord } from "../../firebase/utility";
 import InputPhoto from '../../UI/InputPhoto';
 
 export default function RegisterParent() {
+
     const signUpHandler = e => {
         e.preventDefault();
         const fullName = e.target.fullName.value;
@@ -15,21 +16,25 @@ export default function RegisterParent() {
         signUpWithEmailAndPassWord(fullName, email, password, registerAs, profilePicture, bio);
     }
     return (
-        <form className='__Register-Parent' onSubmit={signUpHandler}>
-            <InputPhoto name='profilePicture' />
-            <input type='text' placeholder='Full Name' name='fullName' />
-            <input type='email' placeholder='Email' name='email' />
-            <input type='password' placeholder='Password' name='password' />
-            <div>
-                <input type='radio' name='registerAs' value='babysitter' className='babySitterInput' checked={true} onChange={e => { }} id='babysitter' />
-                <label htmlFor='babysitter'>BabySitter</label>
-                <input type='radio' name='registerAs' value='parent' id='parent' />
-                <label htmlFor='parent'>Parent</label>
-                <textarea placeholder='Bio' name='bio'>
-
-                </textarea>
+        <div className="register-page-container">
+            <div className="container">
+                <div className="register-box">
+                    <form className='__Register-Parent' onSubmit={signUpHandler}>
+                        <InputPhoto name='profilePicture' />
+                        <input className="field" type='text' placeholder='Full Name' name='fullName' />
+                        <input className="field" type='email' placeholder='Email' name='email' />
+                        <input className="field" type='password' placeholder='Password' name='password' />
+                        <div className="radio-field">
+                                <input type='radio' name='registerAs' value='babysitter' className='babySitterInput' checked={true} onChange={e => { }} id='babysitter' />
+                                <label htmlFor='babysitter'>BabySitter</label>
+                                <input type='radio' name='registerAs' value='parent' id='parent' />
+                                <label htmlFor='parent'>Parent</label>
+                                <textarea className="field" placeholder='Bio' name='bio'></textarea>
+                        </div>
+                        <button className="btn">Sign Up</button>
+                    </form>
+                </div>
             </div>
-            <button>Sign Up</button>
-        </form>
+        </div>
     );
 }

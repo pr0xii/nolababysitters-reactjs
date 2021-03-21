@@ -1,4 +1,4 @@
-const userReducer = (state = null, action) => {
+const userReducer = (state = 'initial', action) => {
     if(action.type === "USER_SIGNED_IN"){
         return action.payload;
     }

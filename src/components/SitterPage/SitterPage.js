@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { getSitter, hireBaySitter } from '../../firebase/utility';
+import { getHireDetailsOfSpecificDate, getSitter, hireBaySitter } from '../../firebase/utility';
 import './SitterPage.scss';
 import { connect } from 'react-redux';
 import Spinner from '../../UI/Spinner';
@@ -18,11 +18,20 @@ const chooseTime = [
     { time: '04:00pm', value: 16 },
 ]
 
+const formatedDate = (date = new Date()) => {
+    let day = date.getDate().toString();
+    if (day.length < 2) day = `0${day}`;
+    let month = (date.getMonth() + 1).toString();
+    if (month.length < 2) month = `0${month}`;
+    const year = date.getFullYear();
+    const formatedDate = `${year}-${month}-${day}`
+    return formatedDate;
+}
+
 class SitterPage extends Component {
     getTime = time => {
         const findTime = chooseTime.find(t => t.value === time);
-        if(findTime) return findTime.time;
-        return this.props.history.push('/');
+        if (findTime) return findTime.time;
     }
     state = {
         sitter: 'initial',
@@ -30,43 +39,51 @@ class SitterPage extends Component {
         startTime: null,
         endTime: null,
         isLoading: false,
+        availableTimes: [],
     }
-    componentDidMount() {
-        const id = this.props.match.params.id;
-        const date = new Date();
-        let day = date.getDate().toString();
-        if (day.length < 2) day = `0${day}`;
-        let month = (date.getMonth() + 1).toString();
-        if (month.length < 2) month = `0${month}`;
-        const year = date.getFullYear();
-        const formatedDate = `${year}-${month}-${day}`
 
-        const { startTime, endTime, selectedDate } = this.props.match.params;
-        
-
-        getSitter(id).then(sitter => {
-            if (!sitter) return this.setState({ sitter: undefined });
-            sitter.id = id;
-            this.setState({ sitter, selectedDate: selectedDate || formatedDate, startTime: startTime || date.getHours() + 1, endTime: endTime || date.getHours() + 2 });
-        })
+    componentDidUpdate() {
+        const { user } = this.props;
+        const { sitter, availableTimes } = this.state;
+        if (sitter === 'initial' && user && availableTimes.length < 1) {
+            const id = this.props.match.params.id;
+            const date = new Date()
+            const selectedDate = formatedDate(date);
+            this.dateHandler(selectedDate);
+            getSitter(id, user.uid, selectedDate).then(sitter => {
+                if (!sitter) return this.setState({ sitter: undefined });
+                sitter.id = id;
+                this.setState({ sitter });
+            })
+        }
     }
 
     onDateChange = e => {
         const { value } = e.target;
-
-        const date = new Date();
-        let day = date.getDate().toString();
-        if (day.length < 2) day = `0${day}`;
-        let month = (date.getMonth() + 1).toString();
-        if (month.length < 2) month = `0${month}`;
-        const year = date.getFullYear();
-        const formatedDate = `${year}-${month}-${day}`;
-
-        const currentDate = new Date(formatedDate).getTime();
+        const currentDate = new Date().getTime();
         const selectedDate = new Date(value).getTime();
+        if (selectedDate >= currentDate) this.dateHandler(value)
+    }
 
-        if (selectedDate >= currentDate) this.setState({ selectedDate: value })
+    dateHandler = (value) => {
+        const date = new Date();
+        getHireDetailsOfSpecificDate(this.state.sitter.id, value)
+            .then(snapshot => {
+                const selectedDate = new Date(value);
+                let startTime = date.getHours();
+                startTime < 8 && (startTime = 8);
 
+                const sitterShedule = [];
+                snapshot.docs.forEach(doc => {
+                    sitterShedule.push(doc.data());
+                })
+                const availableTimes = chooseTime.filter(chooseTime => {
+                    const isBabySitterHired = sitterShedule.find(sheduleTime => sheduleTime.startTime === chooseTime.value);
+                    if (isBabySitterHired) return false
+                    return true;
+                })
+                this.setState({ availableTimes, selectedDate: value, startTime, endTime: startTime + 1 })
+            })
     }
 
     onStartTimeChange = e => {
@@ -86,73 +103,74 @@ class SitterPage extends Component {
             userId: this.props.user.uid
         }
         const isABackup = this.props.match.params.startTime;
-        if(isABackup){
+        if (isABackup) {
             hireDetails.asABackup = true;
         }
         hireBaySitter(hireDetails)
-            .then(res => this.setState({ isLoader: false, showSuccessMessage: true }))
+            .then(res => this.setState({ isLoader: false, showSuccessMessage: true, isSitterHiredByCurrentUser: true }))
             .catch(err => console.log(err))
     }
     render() {
-        const { sitter, isLoading } = this.state;
+        const { sitter, isLoading, availableTimes, showSuccessMessage } = this.state;
         const isSitterHiredByCurrentUser = sitter !== 'initial' && sitter !== undefined && sitter.hired.find(sitterHire => sitterHire.userId === this.props.user.uid)
-        const isABackup = this.props.match.params.startTime;
         switch (sitter) {
             case "initial":
-                return <Spinner />
+                return <Spinner className="loader" />
             case undefined:
                 return <h2>404, not found!</h2>
             default:
                 return (
-                    <div className='__sitter-page'>
-                        <div>
-                            {sitter.hired.map(hireDetails => hireDetails.userId === this.props.user.uid && (
-                                <div>
-                                    You have hired him/her
-                                    <div>Date {hireDetails.selectedDate}</div>
-                                    <div>Start Time {this.getTime(hireDetails.startTime)}</div>
-                                    <div>End Time {this.getTime(hireDetails.endTime)}</div>
-                                </div>
-                            ))}
-                        </div>
-                        <img alt='' src={sitter.photoURL} className='baby-siiter-image' />
-                        <h2 style={{ textAlign: 'center' }}>{sitter.displayName}</h2>
-                        <p>
-                            {sitter.bio}
-                        </p>
+                    <div className="sitter-page-container">
+                        <div className="container">
+                            <div className="sitter-box">
+                                <div className='__sitter-page'>
+                                    <div className='sitter-box'>
+                                        {sitter.hired.map(hireDetails => (
+                                            <div key={hireDetails.id}>
+                                                You have hired him/her
+                                                <div>Date {hireDetails.selectedDate}</div>
+                                                <div>Start Time {this.getTime(hireDetails.startTime)}</div>
+                                                <div>End Time {this.getTime(hireDetails.endTime)}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <img alt='' src={sitter.photoURL} className='baby-siiter-image' />
+                                    <h2 style={{ textAlign: 'center' }}>{sitter.displayName}</h2>
+                                    <p>
+                                        {sitter.bio}
+                                    </p>
+                                    <div>
+                                        <label>
+                                            <span className="label">Date</span>
+                                            <input className="field" type='date' placeholder='Choose Date' value={this.state.selectedDate} onChange={this.onDateChange} />
+                                        </label>
+                                        <div>
+                                            <span className="label">Start Time</span>
+                                            <select className="field" value={this.state.startTime} onChange={this.onStartTimeChange} name='startTime'>
+                                                {chooseTime.slice(0, chooseTime.length - 1).map(time => (
+                                                    <option key={time.value} value={time.value}>
+                                                        {time.time}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <span className="label">End Time</span>
+                                            <select className="field" value={this.state.endTime} name='endTime' onChange={this.onEndTimeChange}>
+                                                {chooseTime.map(time => time.value > this.state.startTime && (
+                                                    <option key={time.value} value={time.value}>
+                                                        {time.time}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
 
-                        {!isABackup && (
-                            <div>
-                                <label>
-                                    <input type='date' placeholder='Choose Date' value={this.state.selectedDate} onChange={this.onDateChange} />
-                                </label>
-                                <div>
-                                    <span>Start TIme</span>
-                                    <select value={this.state.startTime} onChange={this.onStartTimeChange} name='startTime'>
-                                        {chooseTime.slice(0, chooseTime.length - 1).map(time => (
-                                            <option key={time.value} value={time.value}>
-                                                {time.time}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div>
-                                    <span>End TIme</span>
-                                    <select value={this.state.endTime} name='endTime' onChange={this.onEndTimeChange}>
-                                        {chooseTime.map(time => time.value > this.state.startTime && (
-                                            <option key={time.value} value={time.value}>
-                                                {time.time}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    {showSuccessMessage && <div>Successfull</div>}
+                                    {isLoading && !showSuccessMessage ? <Spinner /> : <button onClick={this.onSubmit} className='btn'>Hire</button>}
                                 </div>
                             </div>
-                        )}
-                        {this.state.showSuccessMessage && <div>Successfull</div>}
-                        {!isSitterHiredByCurrentUser && (
-                            isLoading ? <Spinner /> : <button onClick={this.onSubmit}>{isABackup ? 'Hire as a Backup' : 'Hire'}</button>
-                        )}
-                        {isSitterHiredByCurrentUser && !isABackup && <Link to={`/sitters/${this.state.startTime}/${this.state.endTime}/${this.state.selectedDate}`}>Hire a backup</Link>}
+                        </div>
                     </div>
                 )
         }

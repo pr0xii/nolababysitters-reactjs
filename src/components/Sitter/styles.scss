@@ -1,27 +1,89 @@
-.__sitter{
+@font-face {
+    font-family: "Chango";
+    src: url("../../assets/fonts/Chango/Chango-Regular.ttf") format("woff2"),
+    url("../../assets/fonts/Chango/Chango-Regular.ttf") format("woff");
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("../../assets/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf") format("woff2"),
+    url("../../assets/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf") format("woff");
+}
+
+.sitters-page-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+}
+
+.container:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    filter: blur(50px);
+    z-index: -1;
+}
+
+.sitters-box {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80vw;
+}
+
+.__sitter {
     display: flex;
     align-items: center;
     margin-bottom: 24px;
-    img{
+    background-color: rgba(214, 123, 231, 0.5);
+    padding: 20px;
+    box-shadow: 0px 0px 11px 1px rgba(0, 0, 0, 0.19);
+
+    img {
         width: 150px;
         height: 150px;
         border-radius: 50%;
         object-fit: cover;
         margin-right: 2rem;
     }
-    p{
+
+    h4 {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 20px;
+        text-shadow: 2px 2px #000000;
+    }
+
+    p {
         margin: 2rem;
         flex: 1;
+        font-family: "Noto Sans";
     }
-    a{
-        color: inherit;
+
+    a {
+        font-family: "Noto Sans";
+        color: #ffffff;
         text-decoration: none;
-        background: olive;
+        background: #00baff;
         padding: 1rem;
         line-height: 1em;
-        border-radius: 4px;
+        border-radius: 30px;
     }
-}
-.__sitters-section{
-    width: 90vw;
+
+    a:hover {
+        color: #000000;
+        background: #ffffff;
+    }
 }

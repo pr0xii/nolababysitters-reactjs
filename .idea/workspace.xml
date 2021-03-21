@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8d5bd56c-d632-4bdc-97d7-25b5f89ba6d7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/InputPhoto.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/InputPhoto.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Spinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Spinner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Contact/Contact.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Contact/Contact.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Contact/Contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Contact/Contact.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HomePage/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomePage/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Menu/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegisterParent/RegisterParent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterParent/RegisterParent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegisterParent/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterParent/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Sitter/Sitter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sitter/Sitter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Sitter/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sitter/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SitterPage/SitterPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SitterPage/SitterPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SitterPage/SitterPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SitterPage/SitterPage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/SignInPage/SignInPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SignInPage/SignInPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/SignInPage/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SignInPage/styles.scss" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1puVydStxGfJHnVXaaql8mn7PO8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../upwork/netcams-paul/NetcamsJSFront" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8d5bd56c-d632-4bdc-97d7-25b5f89ba6d7" name="Default Changelist" comment="" />
+      <created>1616033217100</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616033217100</updated>
+      <workItem from="1616033218737" duration="2137000" />
+      <workItem from="1616129761165" duration="25842000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1616225326874">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1616225326874" />
+    <state x="347" y="75" width="678" height="554" key="find.popup" timestamp="1616229315900">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="347" y="75" width="678" height="554" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1616229315900" />
+  </component>
+</project>

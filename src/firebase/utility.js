@@ -55,14 +55,15 @@ export const getSitters = () => {
         })
 }
 
-export const getSitter = id => {
-    const hiredPromise = db.collection('hired').where('sitterId', '==', id).get()
-    const sitterPromise = db.doc(`users/${id}`).get()
+export const getSitter = (sitterId, userId, date) => {
+    const hiredPromise = db.collection('hired').where('sitterId', '==', sitterId).where('userId', '==', userId).where('selectedDate', '>=', date).get()
+    const sitterPromise = db.doc(`users/${sitterId}`).get()
 
     return Promise.all([hiredPromise, sitterPromise])
         .then(res => {
+            if (!res[1].exists) return false;
             const sitter = {
-                id,
+                id: sitterId,
                 hired: [],
                 ...res[1].data()
             };
@@ -79,7 +80,15 @@ export const hireBaySitter = hireDetails => {
     return db.collection('hired').add(hireDetails)
 }
 
+export const getHireDetailsOfSpecificDate = (sitterId, date) => {
+    return db.collection('hired').where('sitterId', '==', sitterId).where('selectedDate', '==', date).get()
+}
+
 export const getHireDetails = id => {
     return db.collection('hired').where('sitterId', '==', id).get()
-        
+
+}
+
+export const getBabySitterShedulesForASpecifiDate = (sitterId, babySitter) => {
+
 }

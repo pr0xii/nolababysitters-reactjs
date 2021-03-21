@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "Chango";
+    src: url("../../assets/fonts/Chango/Chango-Regular.ttf") format("woff2"),
+    url("../../assets/fonts/Chango/Chango-Regular.ttf") format("woff");
+}
+
+.home-page-container {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.home-page-container img {
+    width: 60vw;
+    object-fit: contain;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.home-page-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(214, 123, 231, 0.8);
+    z-index: 1;
+    bottom: 0;
+}
+
+.type-wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#typed {
+    font-size: 28px;
+    width: 100%;
+    display: inline-block;
+    font-family: Chango;
+}
+

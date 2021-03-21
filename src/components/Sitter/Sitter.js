@@ -1,7 +1,5 @@
 import React from 'react';
-import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
-import Carousel from 'react-material-ui-carousel'
 import { getSitters } from '../../firebase/utility';
 import './styles.scss'
 import { Link } from 'react-router-dom';
@@ -18,16 +16,22 @@ class Sitter extends React.Component {
     const { sitters } = this.state;
     const path = this.props.location.pathname.replace(this.props.match.path, '')
     return (
-      <section className='__sitters-section'>
-        {sitters ? sitters.map((sitter) => (
-          <div key={sitter.id} className='__sitter'>
-            <img src={sitter.photoURL} alt={sitter.name} />
-            <h4>{sitter.displayName}</h4>
-            <p>{sitter.bio}</p>
-            <Link to={`/sitter/${sitter.id}${path}`}>More Info</Link>
+        <div className="sitters-page-container">
+          <div className="container">
+            <div className="sitters-box">
+              <section className='__sitters-section'>
+                {sitters ? sitters.map((sitter) => (
+                    <div key={sitter.id} className='__sitter'>
+                      <img src={sitter.photoURL} alt={sitter.name} />
+                      <h4>{sitter.displayName}</h4>
+                      <p>{sitter.bio}</p>
+                      <Link to={`/sitter/${sitter.id}${path}`}>Hire Sitter</Link>
+                    </div>
+                )): <Spinner className="loader" />}
+              </section>
+            </div>
           </div>
-        )): <Spinner />}
-      </section>
+        </div>
     );
   }
 }

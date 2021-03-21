@@ -16,18 +16,25 @@ export default function RegisterParent() {
 
         const newErrros = []
         if (email.trim() === "") newErrros.push("Email is not valid")
-        if (password.trim() === "") newErrros.push("Passwrod is not valid");
+        if (password.trim() === "") newErrros.push("Password is not valid");
         if (newErrros.length > 1) return setError(newErrros);
 
         setUserSigning(true);
         signInWithEmailAndPassword(email, password, error => setError([error.message]));
     }
     return (
-        <form className='__SignInPage' onSubmit={signInHandler}>
-            <input type='email' placeholder='Email' name='email' />
-            <input type='password' placeholder='Password' name='password' minLength={8} />
-            {errors.map((err) => <span className='error' key={err}>{err}</span>)}
-            {isUserSigining && errors.length < 1 ? <Spinner /> : <button>Sign In</button>}
-        </form>
+        <div className="signin-page-container">
+            <div className="container">
+                <div className="signin-box">
+                    <h2>Sign In</h2>
+                    <form className='__SignInPage' onSubmit={signInHandler}>
+                        <input className="field" type='email' placeholder='Email' name='email' />
+                        <input className="field" type='password' placeholder='Password' name='password' minLength={8} />
+                        {errors.map((err) => <span className='error' key={err}>{err}</span>)}
+                        {isUserSigining && errors.length < 1 ? <Spinner className="loader" /> : <button className="btn">Sign In</button>}
+                    </form>
+                </div>
+            </div>
+        </div>
     );
 }

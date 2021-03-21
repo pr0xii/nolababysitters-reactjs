@@ -1,0 +1,73 @@
+@font-face {
+    font-family: "Chango";
+    src: url("../../assets/fonts/Chango/Chango-Regular.ttf") format("woff2"),
+    url("../../assets/fonts/Chango/Chango-Regular.ttf") format("woff");
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("../../assets/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf") format("woff2"),
+    url("../../assets/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf") format("woff");
+}
+
+.menu-container {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 60px;
+    z-index: 2;
+}
+
+.menu-links {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+}
+
+.menu-links a,
+.menu-links .link {
+    color: rgba(214, 123, 231, 1);
+    font-family: "Noto Sans";
+    margin: 0 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 5px;
+    text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff;
+}
+
+.menu-links a:after,
+.menu-links .link:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: rgba(214, 123, 231);
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+.menu-links a:hover:after,
+.menu-links .link:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+.menu-links a i,
+.menu-links .link i {
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.menu-logo img {
+    height: 60px;
+}
+

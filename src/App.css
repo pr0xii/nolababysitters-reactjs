@@ -1,16 +1,19 @@
-body{
-  padding: 2rem 0 5rem 0 !important;
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #F5DEEA;
 }
 
-#typed { /* Text Styling */
-  font-family: "Script12 BT";
-  font-weight: bold;
-  font-size: 1.5em;
-}
-
-.bottom-nav{
+.bottom-nav {
   width: 100%;
   position: fixed;
   left: 0;
   bottom: 0;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: rotate(45deg) translate(-50%, -50%);
 }

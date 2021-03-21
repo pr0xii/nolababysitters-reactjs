@@ -3,6 +3,7 @@
     display: none;
   }
   span {
+    z-index: 99;
     cursor: pointer;
     display: block;
     margin: auto;
@@ -17,13 +18,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     font-family: Lato, sans-serif;
-    font-size: 2rem;
+    font-size: 20px;
     text-transform: uppercase;
     color: white;
     border-radius: 50%;
+    margin-bottom: 40px;
 
     &::after {
       position: absolute;
