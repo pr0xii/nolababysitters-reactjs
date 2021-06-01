@@ -41,7 +41,7 @@ class HireSitterForm extends Component {
     onSubmit = e => {
         e.preventDefault();
         const { sitter, startTime, endTime, selectedDate } = this.state;
-        if (endTime === "" || startTime === "" || endTime === "") return this.setState({ error: "Please fill all the fields", showSuccessMessage: false });
+        if (endTime === "" || startTime === "" || endTime === "") return this.setState({ error: "Please fill out all the fields", showSuccessMessage: false });
         this.setState({ isLoading: true, error: "", showSuccessMessage: false });
         const {user} = this.props;
         const hireDetails = {

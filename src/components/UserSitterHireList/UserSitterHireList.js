@@ -24,12 +24,12 @@ const UserSitterHireList = props => {
                                 <div key={sitter.id} className='__sitter'>
                                     <img src={sitter.sitterPhotoURL} alt={sitter.name} />
                                     <h4>{sitter.sitterName}</h4>
-                                    <p>{sitter.selectedDate} <br /> {getTime(sitter.startTime)} - {getTime(sitter.endTime)}</p>
+                                    <p>You have hired this sitter for: <br/>{sitter.selectedDate} <br /> {getTime(sitter.startTime)} - {getTime(sitter.endTime)} <br/>They will contact you via email soon.</p>
                                     <Link to={`/sitter/${sitter.sitterId}`}>More Info</Link>
                                 </div>
                             )): (
                                 <div>
-                                    <p>Start hire a <Link to='/sitters'>Hire a BabySitter</Link></p>
+                                    <p>You currently have no hired babysitters. Click here to <Link to='/sitters'>Hire a BabySitter</Link></p>
                                 </div>
                             )}
                         </section>
